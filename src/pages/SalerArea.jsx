@@ -16,7 +16,7 @@ import {
 } from '../lib/db';
 import { clockTime, timeAgo, useGeo, useLive, useMessages, useScrollToEnd } from '../lib/hooks';
 
-function Login({ onDone }) {
+function Login({ onLoginSuccess }) {
   const [u, setU] = useState('');
   const [p, setP] = useState('');
   const [showPass, setShowPass] = useState(false);
@@ -27,8 +27,9 @@ function Login({ onDone }) {
       onSubmit={(e) => {
         e.preventDefault();
         if (u.trim() === SALER_CREDS.username && p === SALER_CREDS.password) {
-          setSalerSession({ name: u.trim(), at: Date.now() });
-          onDone();
+          const sess = { name: u.trim(), at: Date.now() };
+          setSalerSession(sess);
+          onLoginSuccess(sess);
         } else {
           setErr('Wrong user or password.');
         }
@@ -61,16 +62,21 @@ function Login({ onDone }) {
       </label>
       {err && <p className="error">{err}</p>}
       <button type="submit" className="primary big">Open shop panel</button>
-      <Link to="/" className="ghost small">← Customer site</Link>
+      <Link to="/" className="ghost small" style={{ marginTop: '8px', textAlign: 'center' }}>
+        ← Back to Customer Home
+      </Link>
     </form>
   );
 }
 
 export default function SalerArea() {
-  const session = getSalerSession();
+  const [session, setSession] = useState(() => getSalerSession());
   const { orders } = useLive();
   const { id } = useParams();
   const nav = useNavigate();
+  const store = getStore();
+  // Call all hooks unconditionally at top level
+  const salerGeo = useGeo({ watch: true });
 
   const [tab, setTab] = useState('pending'); // 'pending' or 'done'
   const [salerView, setSalerView] = useState('inbox'); // 'inbox' or 'map'
@@ -87,11 +93,15 @@ export default function SalerArea() {
   const current = id ? getOrder(id) : null;
   const threadPreview = msgs.length ? msgs[msgs.length - 1] : null;
 
-  if (!session) return <Login onDone={() => nav('/saler', { replace: true })} />;
+  function handleLogout() {
+    setSalerSession(null);
+    setSession(null);
+    nav('/', { replace: true });
+  }
 
-  const store = getStore();
-  // Live GPS tracking for the saler's device during delivery
-  const salerGeo = useGeo({ watch: true });
+  if (!session) {
+    return <Login onLoginSuccess={(sess) => setSession(sess)} />;
+  }
 
   const deliveryLoc = current ? (current.deliveryLocation || current.location) : null;
 
@@ -239,8 +249,13 @@ export default function SalerArea() {
                 >
                   📍 Sync GPS
                 </button>
-                <button type="button" className="ghost small" onClick={() => { setSalerSession(null); nav('/saler'); }}>
-                  Logout
+                <button
+                  type="button"
+                  className="ghost small"
+                  onClick={handleLogout}
+                  title="Logout from Saler and return to customer view"
+                >
+                  Logout 🚪
                 </button>
               </div>
             </div>

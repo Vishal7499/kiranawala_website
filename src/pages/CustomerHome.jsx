@@ -50,6 +50,28 @@ export default function CustomerHome() {
   );
   const latestActive = activeOrders[0] || null;
 
+  // Smartly remember and extract previous contact profiles from orders and local storage
+  const savedProfiles = useMemo(() => {
+    const list = [];
+    const seen = new Set();
+    const storedName = localStorage.getItem('kirana_cust_name');
+    const storedPhone = localStorage.getItem('kirana_cust_phone');
+    if (storedName && storedPhone) {
+      list.push({ name: storedName.trim(), phone: storedPhone.trim() });
+      seen.add(`${storedName.trim().toLowerCase()}_${storedPhone.trim()}`);
+    }
+    for (const o of myOrders) {
+      if (o.name && o.phone) {
+        const key = `${o.name.trim().toLowerCase()}_${o.phone.trim()}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          list.push({ name: o.name.trim(), phone: o.phone.trim() });
+        }
+      }
+    }
+    return list;
+  }, [myOrders]);
+
   function lockDeviceAsShop() {
     if (!geo.pos) {
       geo.retry();
@@ -168,6 +190,14 @@ export default function CustomerHome() {
             </button>
           </div>
         </div>
+
+        {/* Welcome greeting if customer name is remembered */}
+        {name && (
+          <div className="user-welcome-chip">
+            <span>👋 Welcome, <strong>{name}</strong>!</span>
+            {phone && <span className="welcome-phone">📞 {phone}</span>}
+          </div>
+        )}
 
         {/* Expandable Dropdown: Store Address, Landmark, Coords & GPS Lock */}
         {showDetails && (
@@ -348,6 +378,35 @@ export default function CustomerHome() {
                   />
                 </label>
               </div>
+
+              {/* Smart Contact Suggestions from Previous Orders */}
+              {savedProfiles.length > 0 && (
+                <div className="saved-profiles-bar">
+                  <div className="saved-profiles-header">
+                    <span>⚡ Saved Contacts (Tap to autofill):</span>
+                  </div>
+                  <div className="saved-profiles-chips">
+                    {savedProfiles.map((prof, idx) => {
+                      const isSelected = name.trim() === prof.name.trim() && phone.replace(/\D/g, '') === prof.phone.replace(/\D/g, '');
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          className={`profile-suggest-chip ${isSelected ? 'active' : ''}`}
+                          onClick={() => {
+                            setName(prof.name);
+                            setPhone(prof.phone);
+                          }}
+                        >
+                          <span>👤 {prof.name}</span>
+                          <span className="chip-phone">({prof.phone})</span>
+                          {isSelected && <span className="chip-check">✓</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               {/* Scrollable Popular Items Suggestions */}
               <div className="modal-section-block">
