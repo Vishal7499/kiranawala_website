@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Production build output
+dist/
+.vite/
+
+# Database files (created automatically on server startup)
+server/data/*.sqlite*
+
+# Environment and local configs
+*.local
+.env
+.env.*.local
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+.gemini/

@@ -1,0 +1,192 @@
+{
+  "settings": {
+    "store": {
+      "name": "Kanifnath Super Market",
+      "tagline": "MilkyMist Ice Cream · Kirana · Daily Essentials",
+      "address": "Shop 1, Vithal Rukhamani Mandir, Tower Line Rd, near Saubhagya Jewellers, Chikhali, Pune, Maharashtra 411062",
+      "landmark": "Near Saubhagya Jewellers & Vitthal Rukmini Mandir (MilkyMist Ice Cream banner)",
+      "lat": 18.6726496,
+      "lng": 73.7911483,
+      "phone": "+919130295446",
+      "phoneDisplay": "+91 91302 95446",
+      "source": "saler_device",
+      "updatedAt": 1794740528716
+    }
+  },
+  "orders": [
+    {
+      "id": "xv1ovctmmwhpx903",
+      "name": "Akolkar Vinit",
+      "phone": "9699438066",
+      "items": [
+        "Bread",
+        "Eggs (6)",
+        "Wheat Atta 5kg"
+      ],
+      "note": "",
+      "deliveryLocation": {
+        "lat": 18.6724911,
+        "lng": 73.7912014,
+        "accuracy": 7,
+        "at": 1794740111380,
+        "source": "device"
+      },
+      "location": {
+        "lat": 18.6724911,
+        "lng": 73.7912014,
+        "accuracy": 7,
+        "at": 1794740111380,
+        "source": "device"
+      },
+      "customerLivePos": {
+        "lat": 18.6724911,
+        "lng": 73.7912014,
+        "accuracy": 7,
+        "at": 1794740111380,
+        "source": "device"
+      },
+      "status": "delivered",
+      "createdAt": 1794740111572,
+      "salerOpenedAt": 1794740184036,
+      "unreadForSaler": 0
+    },
+    {
+      "id": "3rwf13c2mwhpijv2",
+      "name": "Vinit",
+      "phone": "9699438066",
+      "items": [
+        "Kirana basket",
+        "Brush",
+        "Bread",
+        "Milk",
+        "Maggi 2 packet"
+      ],
+      "note": "",
+      "deliveryLocation": {
+        "lat": 18.6725186,
+        "lng": 73.7910803,
+        "accuracy": 7,
+        "at": 1794739425399,
+        "source": "device"
+      },
+      "location": {
+        "lat": 18.6725186,
+        "lng": 73.7910803,
+        "accuracy": 7,
+        "at": 1794739425399,
+        "source": "device"
+      },
+      "customerLivePos": {
+        "lat": 18.6725186,
+        "lng": 73.7910803,
+        "accuracy": 7,
+        "at": 1794739425399,
+        "source": "device"
+      },
+      "status": "delivered",
+      "createdAt": 1794739425806,
+      "salerOpenedAt": 1794739453476,
+      "unreadForSaler": 0,
+      "lastAt": 1794739725038,
+      "lastFrom": "saler"
+    },
+    {
+      "id": "35gjzc4jmwhp0o0y",
+      "name": "vishal markad",
+      "phone": "7499028909",
+      "items": [
+        "Soap",
+        "Ice cream",
+        "Brush",
+        "Egg (6)"
+      ],
+      "note": "",
+      "deliveryLocation": {
+        "lat": 18.672498,
+        "lng": 73.791012,
+        "accuracy": 500,
+        "at": 1794738551881,
+        "source": "device"
+      },
+      "location": {
+        "lat": 18.672498,
+        "lng": 73.791012,
+        "accuracy": 500,
+        "at": 1794738551881,
+        "source": "device"
+      },
+      "customerLivePos": {
+        "lat": 18.672498,
+        "lng": 73.791012,
+        "accuracy": 500,
+        "at": 1794738868468,
+        "source": "device"
+      },
+      "status": "delivered",
+      "createdAt": 1794738591394,
+      "salerOpenedAt": 1794738612297,
+      "unreadForSaler": 0
+    },
+    {
+      "id": "l4ody1t1mwhnmfjp",
+      "name": "vishal markad",
+      "phone": "7499028909",
+      "items": [
+        "Kirana basket",
+        "Colgate",
+        "Brush",
+        "Milk",
+        "tambaku 1"
+      ],
+      "note": "",
+      "location": {
+        "lat": 18.672421,
+        "lng": 73.791088,
+        "accuracy": 10,
+        "at": 1794736296404,
+        "source": "device"
+      },
+      "status": "new",
+      "createdAt": 1794736247605,
+      "salerOpenedAt": 1794736628318,
+      "unreadForSaler": 0
+    }
+  ],
+  "messages": {
+    "l4ody1t1mwhnmfjp": [],
+    "35gjzc4jmwhp0o0y": [],
+    "3rwf13c2mwhpijv2": [
+      {
+        "id": "rxcz3ttqmwhpnsb1",
+        "from": "customer",
+        "text": "Hii",
+        "at": 1794739670029
+      },
+      {
+        "id": "efhhdb1bmwhpo1ud",
+        "from": "saler",
+        "text": "Hii",
+        "at": 1794739682389
+      },
+      {
+        "id": "db1c9ruxmwhpomas",
+        "from": "saler",
+        "text": "📍 Reached at your delivery location.",
+        "at": 1794739708900
+      },
+      {
+        "id": "32kadj3fmwhpor3h",
+        "from": "customer",
+        "text": "Ok",
+        "at": 1794739715117
+      },
+      {
+        "id": "3ea77oo9mwhpoyr2",
+        "from": "saler",
+        "text": "Ok",
+        "at": 1794739725038
+      }
+    ],
+    "xv1ovctmmwhpx903": []
+  }
+}
