@@ -61,12 +61,13 @@ body {
 }
 
 .brand-logo-img {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  object-position: center 20%;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   background: #000;
   flex-shrink: 0;
 }
@@ -1389,10 +1390,11 @@ legend {
 }
 
 .store-title-logo-img {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 20%;
   border: 1px solid var(--green-m);
   background: #000;
   flex-shrink: 0;
