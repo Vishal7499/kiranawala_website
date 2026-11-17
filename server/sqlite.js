@@ -21,8 +21,6 @@ export const DEFAULT_STORE = {
   lng: 73.791012,
   phone: '+919130295446',
   phoneDisplay: '+91 91302 95446',
-  whatsapp: '+917499028909',
-  whatsappDisplay: '+91 74990 28909',
   source: 'default',
   updatedAt: Date.now(),
 };

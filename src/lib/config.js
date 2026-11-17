@@ -10,8 +10,6 @@ export const STORE = {
   lng: 73.791012,
   phone: '+919130295446',
   phoneDisplay: '+91 91302 95446',
-  whatsapp: '+917499028909',
-  whatsappDisplay: '+91 74990 28909',
 };
 
 export const DEFAULT_STORE = {
@@ -22,8 +20,6 @@ export const DEFAULT_STORE = {
   lng: STORE.lng,
   phone: STORE.phone,
   phoneDisplay: STORE.phoneDisplay,
-  whatsapp: STORE.whatsapp,
-  whatsappDisplay: STORE.whatsappDisplay,
 };
 
 export const SALER_CREDS = {

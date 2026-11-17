@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import MapView from '../components/MapView';
 import { SALER_CREDS, STATUS_FLOW, STATUS_LABEL, STORE } from '../lib/config';
@@ -69,7 +69,7 @@ function Login({ onLoginSuccess }) {
   );
 }
 
-export default function SalerArea({ onOpenQR }) {
+export default function SalerArea() {
   const [session, setSession] = useState(() => getSalerSession());
   const { orders } = useLive();
   const { id } = useParams();
@@ -84,112 +84,6 @@ export default function SalerArea({ onOpenQR }) {
   const [packedItems, setPackedItems] = useState({});
   const [showChatModal, setShowChatModal] = useState(false);
   const [storeMsg, setStoreMsg] = useState('');
-
-  // Audio Bell & Phone Push Notification controls
-  const [soundEnabled, setSoundEnabled] = useState(() => {
-    return localStorage.getItem('kirana_saler_sound') !== 'false';
-  });
-  const [notifPermission, setNotifPermission] = useState(() => {
-    return typeof window !== 'undefined' && 'Notification' in window ? Notification.permission : 'unsupported';
-  });
-  const prevOrderIdsRef = useRef(null);
-
-  // Synthesize pleasant 2-tone alert chime with Web Audio API (0 external dependencies)
-  function playOrderChime() {
-    if (!soundEnabled) return;
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-      if (ctx.state === 'suspended') {
-        ctx.resume();
-      }
-      const now = ctx.currentTime;
-      // High-pitched 2-tone supermarket alert chime (E5 -> A5 -> C6)
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(659.25, now);
-      osc1.frequency.setValueAtTime(880, now + 0.14);
-      gain1.gain.setValueAtTime(0.35, now);
-      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-      osc1.start(now);
-      osc1.stop(now + 0.45);
-
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.type = 'triangle';
-      osc2.frequency.setValueAtTime(1046.5, now + 0.2);
-      gain2.gain.setValueAtTime(0.4, now + 0.2);
-      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(now + 0.2);
-      osc2.stop(now + 0.8);
-    } catch (e) {
-      console.warn('Audio chime error:', e);
-    }
-  }
-
-  // Request browser push notification permission
-  function requestPushPermission() {
-    if (!('Notification' in window)) {
-      alert('Browser notifications are not supported on this browser.');
-      return;
-    }
-    Notification.requestPermission().then((perm) => {
-      setNotifPermission(perm);
-      if (perm === 'granted') {
-        try {
-          new Notification('🔔 Notifications Enabled!', {
-            body: 'You will receive an alert whenever a customer places an order.',
-            icon: '/favicon.ico',
-          });
-        } catch (_) {}
-        playOrderChime();
-      }
-    });
-  }
-
-  // Detect incoming orders in real-time and sound chime + push notification
-  useEffect(() => {
-    if (!orders || orders.length === 0) {
-      if (prevOrderIdsRef.current === null) {
-        prevOrderIdsRef.current = new Set();
-      }
-      return;
-    }
-
-    if (prevOrderIdsRef.current === null) {
-      // First load, save current order ids without chiming
-      prevOrderIdsRef.current = new Set(orders.map((o) => o.id));
-      return;
-    }
-
-    // Check for newly arrived orders
-    const newlyArrived = orders.filter((o) => !prevOrderIdsRef.current.has(o.id) && o.status === 'new');
-    if (newlyArrived.length > 0) {
-      playOrderChime();
-      if (notifPermission === 'granted') {
-        newlyArrived.forEach((o) => {
-          const itemsSummary = (o.items || []).slice(0, 3).join(', ');
-          try {
-            new Notification(`🛒 New Order: ${o.name}`, {
-              body: `📞 ${o.phone} · ${itemsSummary}${o.items?.length > 3 ? '...' : ''}`,
-              icon: '/favicon.ico',
-              tag: o.id,
-            });
-          } catch (e) {
-            console.warn(e);
-          }
-        });
-      }
-    }
-
-    prevOrderIdsRef.current = new Set(orders.map((o) => o.id));
-  }, [orders, soundEnabled, notifPermission]);
 
   const msgs = useMessages(id);
   const boxRef = useScrollToEnd(msgs.length + (id || ''));
@@ -385,60 +279,6 @@ export default function SalerArea({ onOpenQR }) {
               </button>
             </div>
 
-            {/* Quick Tools: Sound Alert, Push Notifications, Standee QR */}
-            <div className="saler-tools-bar">
-              <button
-                type="button"
-                className={`saler-tool-pill ${soundEnabled ? 'active' : ''}`}
-                onClick={() => {
-                  const next = !soundEnabled;
-                  setSoundEnabled(next);
-                  localStorage.setItem('kirana_saler_sound', String(next));
-                  if (next) playOrderChime();
-                }}
-                title={soundEnabled ? 'Sound alert is ON. Click to mute.' : 'Sound alert is MUTED. Click to enable.'}
-              >
-                <span>{soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF'}</span>
-              </button>
-
-              {soundEnabled && (
-                <button
-                  type="button"
-                  className="saler-tool-pill test-sound"
-                  onClick={playOrderChime}
-                  title="Test alert chime volume"
-                >
-                  🔔 Test Bell
-                </button>
-              )}
-
-              <button
-                type="button"
-                className={`saler-tool-pill notif ${notifPermission === 'granted' ? 'granted' : ''}`}
-                onClick={requestPushPermission}
-                title="Enable browser notifications"
-              >
-                <span>
-                  {notifPermission === 'granted'
-                    ? '🟢 Phone Alert: Active'
-                    : notifPermission === 'denied'
-                    ? '🔴 Alert: Blocked'
-                    : '🔔 Enable Phone Alerts'}
-                </span>
-              </button>
-
-              {onOpenQR && (
-                <button
-                  type="button"
-                  className="saler-tool-pill qr"
-                  onClick={onOpenQR}
-                  title="View & Download Shop Counter Standee QR Code"
-                >
-                  📱 Standee QR
-                </button>
-              )}
-            </div>
-
             {salerView === 'map' && (
               <div style={{ marginTop: '10px' }}>
                 <MapView height={240} points={allPendingMapPoints} zoom={pending.length ? undefined : 16} />
@@ -530,16 +370,6 @@ export default function SalerArea({ onOpenQR }) {
                           title={`Call ${o.name} (${o.phone})`}
                         >
                           📞 Call
-                        </a>
-                        <a
-                          className="card-action-btn btn-wa-sm"
-                          href={`https://wa.me/91${cleanPhone}?text=${encodeURIComponent(`Hi ${o.name}, Kanifnath Super Market here regarding your order #${o.id.slice(-4)}`)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          title={`WhatsApp ${o.name} (${o.phone})`}
-                        >
-                          💬 WA
                         </a>
                         <button
                           type="button"

@@ -25,7 +25,7 @@ const POPULAR_SUGGESTIONS = [
   { name: 'Onions 1kg', emoji: '🧅' },
 ];
 
-export default function CustomerHome({ onOpenQR }) {
+export default function CustomerHome() {
   const geo = useGeo({ watch: true });
   const { myOrders } = useLive();
   const nav = useNavigate();
@@ -146,7 +146,7 @@ export default function CustomerHome({ onOpenQR }) {
         <div className="compact-top-row">
           <div className="compact-store-meta">
             <h1 className="compact-store-title">
-              <img src="/logo/kanifnath-logo.png" alt="Kanifnath Logo" className="store-logo-avatar" />
+              <img src="/logo/kanifnath-logo.png" alt="Kanifnath Logo" className="store-title-logo-img" />
               <span className="store-title-text">{store.name}</span>
             </h1>
 
@@ -167,19 +167,6 @@ export default function CustomerHome({ onOpenQR }) {
           </div>
 
           <div className="compact-top-actions">
-            {/* Shop QR code button */}
-            {onOpenQR && (
-              <button
-                type="button"
-                className="compact-qr-btn"
-                onClick={onOpenQR}
-                title="View & Download Shop QR Code Standee"
-                aria-label="Shop QR Code"
-              >
-                📱 QR
-              </button>
-            )}
-
             {/* Small refresh button */}
             <button
               type="button"
