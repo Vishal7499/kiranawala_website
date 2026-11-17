@@ -2495,5 +2495,447 @@ legend {
   font-weight: 500;
 }
 
+/* ==========================================================================
+   WhatsApp Order Alerts & Action Buttons
+   ========================================================================== */
+.whatsapp-order-card {
+  margin: 14px 0 10px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.08);
+}
+
+.wa-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+
+.wa-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #22c55e;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.wa-subtitle {
+  font-size: 12.5px;
+  color: #166534;
+}
+
+.btn-whatsapp-order {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.btn-whatsapp-order:hover,
+.btn-whatsapp-order:active {
+  background: #20ba5a;
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp-order .wa-icon {
+  font-size: 18px;
+}
+
+.wa-help-note {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  color: #15803d;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.btn-whatsapp-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #15803d !important;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  text-decoration: none;
+  transition: all 0.12s ease;
+}
+
+.btn-whatsapp-chat:hover {
+  background: #bbf7d0;
+}
+
+/* ==========================================================================
+   Saler Tools Bar: Audio Chime & Phone Notifications
+   ========================================================================== */
+.saler-tools-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 8px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.saler-tool-pill {
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.12s ease;
+}
+
+.saler-tool-pill:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+.saler-tool-pill.active {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.saler-tool-pill.test-sound {
+  background: #fefce8;
+  border-color: #fde047;
+  color: #854d0e;
+}
+
+.saler-tool-pill.notif.granted {
+  background: #f0fdf4;
+  border-color: #22c55e;
+  color: #15803d;
+}
+
+.saler-tool-pill.qr {
+  background: #faf5ff;
+  border-color: #c084fc;
+  color: #7e22ce;
+}
+
+.btn-wa-sm {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border-color: #86efac !important;
+}
+
+.btn-wa-sm:hover {
+  background: #bbf7d0 !important;
+}
+
+/* ==========================================================================
+   Header QR Buttons & Standee Modal
+   ========================================================================== */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qr-header-btn {
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #c084fc;
+  background: #faf5ff;
+  color: #7e22ce;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.12s ease;
+}
+
+.qr-header-btn:hover {
+  background: #f3e8ff;
+  border-color: #a855f7;
+}
+
+.compact-qr-btn {
+  padding: 5px 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #c084fc;
+  background: #faf5ff;
+  color: #7e22ce;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.compact-qr-btn:hover {
+  background: #f3e8ff;
+}
+
+/* Modal Backdrop */
+.qr-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.qr-modal-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  padding: 24px 20px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  font-size: 16px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-modal-close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* Standee Card */
+.printable-standee {
+  background: #ffffff;
+  border: 2px dashed #0284c7;
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.standee-header {
+  margin-bottom: 12px;
+}
+
+.standee-store-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  background: #0284c7;
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.standee-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.standee-tagline {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.standee-qr-frame {
+  margin: 12px auto;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.standee-qr-img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  max-width: 240px;
+  height: auto;
+}
+
+.standee-scan-pill {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.standee-footer {
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.standee-url-box {
+  background: #f1f5f9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.standee-url-label {
+  color: #64748b;
+  margin-right: 6px;
+}
+
+.standee-url {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+.standee-address,
+.standee-phone {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.qr-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.qr-action-btn {
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.12s ease;
+}
+
+.qr-action-btn.primary {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.qr-action-btn.primary:hover {
+  background: #0369a1;
+}
+
+.qr-action-btn.print {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.qr-action-btn.print:hover {
+  background: #f1f5f9;
+}
+
+.qr-action-btn.ghost {
+  background: transparent;
+  color: #64748b;
+  border-color: transparent;
+}
+
+.qr-action-btn.ghost:hover {
+  color: #0f172a;
+}
+
+.qr-modal-note {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.4;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   Print Optimization for Shop Counter Standee
+   ========================================================================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-standee,
+  #printable-standee * {
+    visibility: visible;
+  }
+  #printable-standee {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    border: 3px solid #0284c7;
+    padding: 24px 20px;
+    box-shadow: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
 
 

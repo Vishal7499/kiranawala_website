@@ -5,7 +5,29 @@ import { STATUS_CUSTOMER_LABEL, STORE } from '../lib/config';
 import { addMessage, distanceKm, getStore, updateOrder } from '../lib/db';
 import { clockTime, useGeo, useLive, useMessages, useScrollToEnd } from '../lib/hooks';
 
-export default function CustomerChat() {
+function getWhatsAppOrderUrl(order) {
+  const shopNumber = '917499028909';
+  const itemsText = (order.items || []).map((it, idx) => `  ${idx + 1}. ${it}`).join('\n');
+  const trackingUrl = `https://www.kiranawala.shop/order/${order.id}`;
+  const loc = order.deliveryLocation || order.location;
+  const locUrl = loc ? `https://www.google.com/maps?q=${loc.lat},${loc.lng}` : '';
+
+  const msg =
+    `🛒 *NEW KIRANA ORDER — Kiranawala.shop*\n` +
+    `━━━━━━━━━━━━━━━━━━━━\n` +
+    `👤 *Customer:* ${order.name}\n` +
+    `📞 *Phone:* ${order.phone}\n` +
+    (order.note ? `📝 *Note:* ${order.note}\n` : '') +
+    (locUrl ? `📍 *Customer Delivery Map:* ${locUrl}\n` : '') +
+    `\n🛍️ *Items Requested:*\n${itemsText}\n\n` +
+    `━━━━━━━━━━━━━━━━━━━━\n` +
+    `🔗 *Live Order Tracking:* ${trackingUrl}\n` +
+    `🏪 *Shop:* Kanifnath Super Market, Chikhali`;
+
+  return `https://wa.me/${shopNumber}?text=${encodeURIComponent(msg)}`;
+}
+
+export default function CustomerChat({ onOpenQR }) {
   const { id } = useParams();
   const nav = useNavigate();
   const geo = useGeo({ watch: true });
@@ -78,8 +100,36 @@ export default function CustomerChat() {
           {order.note && <p className="muted">Note: {order.note}</p>}
         </div>
 
+        {/* Instant WhatsApp Order Notification to 7499028909 */}
+        <div className="whatsapp-order-card">
+          <div className="wa-card-header">
+            <span className="wa-badge">💬 WhatsApp Order Alert</span>
+            <span className="wa-subtitle">Shop WhatsApp: <strong>+91 74990 28909</strong></span>
+          </div>
+          <a
+            className="btn-whatsapp-order"
+            href={getWhatsAppOrderUrl(order)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="wa-icon">📲</span>
+            <span>Send Order Details to Shop on WhatsApp</span>
+          </a>
+          <p className="wa-help-note">
+            ⚡ Tap button to instantly ping the shopkeeper on WhatsApp with your name and grocery list!
+          </p>
+        </div>
+
         <div className="row-btns">
           <a className="call" href={`tel:${STORE.phone}`}>📞 Call shop</a>
+          <a
+            className="btn-whatsapp-chat"
+            href={`https://wa.me/917499028909?text=${encodeURIComponent(`Hi Kanifnath Super Market, I placed order #${order.id.slice(-4)}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💬 WhatsApp 7499028909
+          </a>
           <a
             className="btn-directions"
             href={
@@ -90,7 +140,7 @@ export default function CustomerChat() {
             target="_blank"
             rel="noreferrer"
           >
-            🧭 Directions to store
+            🧭 Directions
           </a>
         </div>
       </section>
@@ -141,9 +191,16 @@ export default function CustomerChat() {
             Send
           </button>
         </form>
-        <button type="button" className="ghost small" onClick={() => nav('/')}>
-          New order
-        </button>
+        <div style={{ display: 'flex', gap: '8px', marginTop: '10px' }}>
+          <button type="button" className="ghost small" onClick={() => nav('/')}>
+            ← New order
+          </button>
+          {onOpenQR && (
+            <button type="button" className="ghost small" onClick={onOpenQR}>
+              📱 Shop QR Standee
+            </button>
+          )}
+        </div>
       </section>
     </div>
   );
