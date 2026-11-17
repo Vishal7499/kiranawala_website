@@ -51,6 +51,7 @@ export default function QRCodeModal({ isOpen, onClose }) {
         {/* Printable Standee Card */}
         <div className="printable-standee" id="printable-standee">
           <div className="standee-header">
+            <img src="/logo/kanifnath-logo.png" alt="Kanifnath Maharaj Logo" className="standee-logo-img" />
             <span className="standee-store-badge">🏪 KANIFNATH SUPER MARKET</span>
             <h2 className="standee-title">Scan to Order Groceries</h2>
             <p className="standee-tagline">15-Min Quick Delivery · Daily Fresh Essentials</p>
@@ -104,3 +105,4 @@ export default function QRCodeModal({ isOpen, onClose }) {
     </div>
   );
 }
+

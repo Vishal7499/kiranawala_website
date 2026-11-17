@@ -60,6 +60,40 @@ body {
   line-height: 1;
 }
 
+.brand-logo-img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #86efac;
+  background: #000;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.store-logo-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #16a34a;
+  background: #000;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.standee-logo-img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0284c7;
+  background: #000;
+  margin: 0 auto 8px;
+  display: block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
 .brand strong {
   display: block;
   font-size: 15px;

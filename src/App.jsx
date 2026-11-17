@@ -15,7 +15,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <Link to="/" className="brand">
-          <span className="brand-logo">🏪</span>
+          <img src="/logo/kanifnath-logo.png" alt="Kanifnath Super Market" className="brand-logo-img" />
           <span>
             <strong>{STORE.name}</strong>
             <em>Kirana · 15 min delivery</em>

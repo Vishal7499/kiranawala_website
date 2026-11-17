@@ -146,7 +146,7 @@ export default function CustomerHome({ onOpenQR }) {
         <div className="compact-top-row">
           <div className="compact-store-meta">
             <h1 className="compact-store-title">
-              <span className="store-emoji">🏪</span>
+              <img src="/logo/kanifnath-logo.png" alt="Kanifnath Logo" className="store-logo-avatar" />
               <span className="store-title-text">{store.name}</span>
             </h1>
 
@@ -376,7 +376,7 @@ export default function CustomerHome({ onOpenQR }) {
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Vishal Markad"
+                    placeholder="Your name"
                     autoFocus
                   />
                 </label>
